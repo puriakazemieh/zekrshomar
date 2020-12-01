@@ -21,8 +21,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         Toolbar tb=findViewById(R.id.tb_MainActivity_toolbar);
         setSupportActionBar(tb);
         // setActionBar(tb);
@@ -88,10 +86,5 @@ public class MainActivity extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
-    }
-    //  new line with comment
-    public void test(){
-// comments are test for github
-        // coments are test for
     }
 }
