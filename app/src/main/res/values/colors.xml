@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="green">#8bad23</color>
+    <color name="tosi">#D7D8D7</color>
+    <color name="tosidark">#BABABA</color>
+    <color name="sefid">#FFFFFF</color>
+    <color name="colorAccent">#D81B60</color>
+</resources>

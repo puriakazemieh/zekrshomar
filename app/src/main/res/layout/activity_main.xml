@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/tv_MainActivity_plus"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/ripple"
+        android:gravity="bottom|center_horizontal"
+        android:text="+"
+        android:textColor="@color/colorPrimary"
+        android:textSize="150sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tb_MainActivity_toolbar"
+        app:layout_constraintVertical_bias="0.58000004" />
+
+    <TextView
+        android:id="@+id/tv_MainActivity_counter"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/z"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="0"
+        android:textColor="@color/green"
+        android:textSize="45sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.20" />
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_MainActivity_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/tbbackground"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/b_MainActivity_reset"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:padding="8dp"
+                android:foreground="?selectableItemBackground"
+                android:background="@drawable/ic_refresh_black_24dp"/>
+
+            <Button
+                android:id="@+id/b_MainActivity_save"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/ic_save_black_24dp"
+                android:clickable="true"
+                android:padding="8dp" />
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
