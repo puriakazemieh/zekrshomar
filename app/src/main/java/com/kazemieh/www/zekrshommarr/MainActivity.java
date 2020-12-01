@@ -91,6 +91,6 @@ public class MainActivity extends AppCompatActivity {
     }
     //  new line with comment
     public void test(){
-
+// comments are
     }
 }
