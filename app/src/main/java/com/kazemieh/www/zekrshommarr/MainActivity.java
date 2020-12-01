@@ -92,6 +92,6 @@ public class MainActivity extends AppCompatActivity {
     //  new line with comment
     public void test(){
 // comments are test for github
-        // coments
+        // coments are test for
     }
 }
