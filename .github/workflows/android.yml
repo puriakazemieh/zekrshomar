@@ -27,8 +27,8 @@ jobs:
             ${{ runner.os }}-gradle-
 
 
-    - name: Assemble Debug
-    - run: ./gradlew assembleDebug
+    # - name: Assemble Debug
+    # - run: ./gradlew assembleDebug
 
 
     # - name: Upload APK
