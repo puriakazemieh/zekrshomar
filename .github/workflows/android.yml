@@ -8,7 +8,7 @@ on:
 
 jobs:
   assemble:
-    name: Assemble
+    # name: Assemble
     runs-on: ubuntu-latest
 
     steps:
@@ -27,8 +27,8 @@ jobs:
             ${{ runner.os }}-gradle-
 
 
-    # - name: Assemble Debug
-    # - run: ./gradlew assembleDebug
+    - name: Assemble Debug
+    - run: ./gradlew assembleDebug
 
 
     # - name: Upload APK
