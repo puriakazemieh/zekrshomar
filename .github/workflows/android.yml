@@ -28,7 +28,7 @@ jobs:
 
 
     - name: Assemble Debug
-    - run: ./gradlew assembleDebug
+      run: ./gradlew assembleDebug
 
 
     # - name: Upload APK
