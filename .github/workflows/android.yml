@@ -33,11 +33,11 @@ jobs:
       run: ./gradlew assemble
 
 
-    - name: Upload APK
+    - name: Upload APK test
       uses: actions/upload-artifact@v3
       with:
-          name: apk
-          path: app/build/outputs/apk/debug/**.apk
+          name: test
+          path: app/build/outputs/apk/debug/testpuria.apk
 
           
  
