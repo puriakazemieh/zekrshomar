@@ -31,11 +31,11 @@ jobs:
       run: ./gradlew assembleDebug
 
 
-    # - name: Upload APK
-    #   uses: actions/upload-artifact@v3
-    #   with:
-    #       name: apk
-    #       path: app/build/outputs/apk/debug/**.apk
+    - name: Upload APK
+      uses: actions/upload-artifact@v3
+      with:
+          name: apk
+          path: app/build/outputs/apk/debug/**.apk
 
           
  
