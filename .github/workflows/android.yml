@@ -5,6 +5,18 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      envarioment:
+        description: 'test puria'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - qa
+          - dev
+        
 
 jobs:
   assemble:
