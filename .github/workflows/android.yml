@@ -23,7 +23,6 @@ on:
 #          type: string
 #    schedule:
 #     - cron: ' 0 1 * * * '
-        
 
 jobs:
 
@@ -60,7 +59,6 @@ jobs:
             name: test-reports
             path: '**/build/reports/tests/'
 
-
   android_test_job:
     name: Android Tests
     runs-on: macos-latest
@@ -80,7 +78,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
       - name: Instrumentation Tests
-        uses: reactivecircus/android-emulator-runner@v3
+        uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
           script: ./gradlew connectedAndroidTest
@@ -118,3 +116,22 @@ jobs:
       with:
           name: apk
           path: app/build/outputs/apk/debug/**.apk
+
+  notification_job:
+    needs: [ local_test_job, android_test_job,Build_job ]
+    name: Notify workflow Result
+    runs-on: ubuntu-latest
+    steps:
+      - uses: technote-space/workflow-conclusion-action@v1
+      - name: Send Email
+        if: failure()
+        uses: dawidd6/action-send-mail@v2
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: Github Actions Job result
+          body: Build job of ${{github.repository}} completed successfully! The Job worflow ${{ github.workflow }} of ${{ github.repository }} has result of ${{ env.WORKFLOW_CONCLUSION }}
+          to: puriakazemieh@gamil.com
+          from: From Github Action
