@@ -21,14 +21,15 @@ on:
           required: true
           default: '23'
           type: string
-  schedule:
-    - cron: ' 0 1 * * * '
+  # schedule:
+    # - cron: ' 0 1 * * * '
         
 
 jobs:
   assemble:
     # name: Assemble
     runs-on: ubuntu-latest
+    # continue-on-error: true
 
     steps:
     - name: Checkout
@@ -59,6 +60,16 @@ jobs:
 
     # - name: Build with Gradle
     #   run: ./gradlew build
+
+    - name: Run Debug Tests
+      run: ./gradlew testDebugUnitTest --continue
+    - name: Upload Test Reports
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v3
+      with: 
+        name: test-reports
+        path: '**/build/reports/tests/'
+        
 
     - name: Upload APK
       uses: actions/upload-artifact@v3
