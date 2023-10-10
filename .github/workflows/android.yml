@@ -75,7 +75,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
           name: apk
-          path: app/build/outputs/apk/debug/zhekrshomar.apk
+          path: app/build/outputs/apk/debug/**.apk
 
 
     - name: Instrumentation Tests
