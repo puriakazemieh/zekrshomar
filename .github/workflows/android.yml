@@ -78,4 +78,22 @@ jobs:
           path: app/build/outputs/apk/debug/zhekrshomar.apk
 
 
+    - name: Instrumentation Tests
+      uses: reactivecircus/android-emulator-runner@v3
+      with:
+        api-level: 29
+        script: ./gradlew connectedAndroidTest
+
+    - name: Upload Android Test Reports
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v3
+      with: 
+        name: android-test-reports
+        path: '**/build/reports/tests/'
+    
+        
+        
+    
+
+
 
