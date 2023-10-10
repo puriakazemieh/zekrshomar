@@ -86,7 +86,7 @@ jobs:
 
     - name: Upload Android Test Reports
       if: ${{ always() }}
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v1
       with: 
         name: android-test-reports
         path: '**/build/reports/tests/'
