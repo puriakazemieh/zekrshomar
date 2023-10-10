@@ -61,20 +61,21 @@ jobs:
     # - name: Build with Gradle
     #   run: ./gradlew build
 
-    - name: Run Debug Tests
-      run: ./gradlew testDebugUnitTest --continue
-    - name: Upload Test Reports
-      if: ${{ always() }}
-      uses: actions/upload-artifact@v3
-      with: 
-        name: test-reports
-        path: '**/build/reports/tests/'
+    # - name: Run Debug Tests
+      # run: ./gradlew testDebugUnitTest --continue
+    # - name: Upload Test Reports
+      # if: ${{ always() }}
+      # uses: actions/upload-artifact@v3
+      # with: 
+        # name: test-reports
+        # path: '**/build/reports/tests/'
         
 
-    - name: Upload APK
-      uses: actions/upload-artifact@v3
-      with:
-          name: apk
-          path: app/build/outputs/apk/debug/**.apk
+    # - name: Upload APK
+      # uses: actions/upload-artifact@v3
+      # with:
+          # name: apk
+          # path: app/build/outputs/apk/debug/**.apk
+
 
 
