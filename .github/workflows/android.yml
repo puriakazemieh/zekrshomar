@@ -21,7 +21,8 @@ on:
           required: true
           default: '23'
           type: string
-          
+  schedule:
+    - cron: ' 0 1 * * * '
         
 
 jobs:
