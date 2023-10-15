@@ -42,14 +42,14 @@ jobs:
 
       # Show information about the APK's signing certificates
       - name: Verify Signature
-        run: $ANDROID_SDK_ROOT/build-tools/33.0.1/apksigner verify --print-certs app/build/outputs/apk/release/<<application name>>_${{ github.event.inputs.version }}.apk
+        run: $ANDROID_SDK_ROOT/build-tools/33.0.1/apksigner verify --print-certs app/build/outputs/apk/release/Zekrshomar_${{ github.event.inputs.version }}.apk
 
       # Save the APK after the Build job is complete to publish it as a Github release in the next job
       - name: Upload APK
         uses: actions/upload-artifact@v3.1.2
         with:
-          name: <<application name>>
-          path: app/build/outputs/apk/release/<<application name>>_${{ github.event.inputs.version }}.apk
+          name: Zekrshomar
+          path: app/build/outputs/apk/release/Zekrshomar_${{ github.event.inputs.version }}.apk
   release:
     name: Release APK
     needs: build
@@ -58,7 +58,7 @@ jobs:
       - name: Download APK from build
         uses: actions/download-artifact@v1
         with:
-          name: <<application name>>
+          name: Zekrshomar
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v1
@@ -69,4 +69,4 @@ jobs:
           name: Release v${{ github.event.inputs.version }}
           draft: false
           prerelease: false
-          files: <<application name>>/<<application name>>_${{ github.event.inputs.version }}.apk
+          files: Zekrshomar/Zekrshomar_${{ github.event.inputs.version }}.apk
