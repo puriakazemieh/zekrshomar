@@ -23,9 +23,6 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-
-
-
       - name: Build APK
         run: ./gradlew :app:assembleRelease -x test
         env:
@@ -34,18 +31,18 @@ jobs:
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
 
 
-      - name: Build Release APK
-        run: ./gradlew assembleRelease
-               - name: Releasing using Hub
-               uses: VladDaniliuk/action-release-releaseapk@master
-               env:
-                 GITHUB_TOKEN: ${{ secrets.TOKEN }}
-                 VERSION_VARIABLE: versionName
-                 APP_FILE: buildSrc/Android.kt
-                 APP_FOLDER: ./app/release/app.apk
-                 CHANGELOG_FILE: ./CHANGELOG.md
-                 RELEASE_TITLE: New Build
-                 NAME_VARIABLE: app-release.apk
+#      - name: Build Release APK
+#        run: ./gradlew assembleRelease
+#               - name: Releasing using Hub
+#               uses: VladDaniliuk/action-release-releaseapk@master
+#               env:
+#                 GITHUB_TOKEN: ${{ secrets.TOKEN }}
+#                 VERSION_VARIABLE: versionName
+#                 APP_FILE: buildSrc/Android.kt
+#                 APP_FOLDER: ./app/release/app.apk
+#                 CHANGELOG_FILE: ./CHANGELOG.md
+#                 RELEASE_TITLE: New Build
+#                 NAME_VARIABLE: app-release.apk
 
 #      - uses: iota9star/sign-android-release@v1.0.5
 #        name: Sign app APK
