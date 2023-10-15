@@ -23,26 +23,44 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build APK
-        run: ./gradlew :app:assembleRelease -x test
-        env:
-          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
-          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
-          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+      - name: Build Release APK
+        run: ./gradlew assembleRelease
+         - name: Releasing using Hub
+           uses: VladDaniliuk/action-release-releaseapk@master
+           env:
+             GITHUB_TOKEN: ${{ secrets.TOKEN }}
+             VERSION_VARIABLE: versionName
+             APP_FILE: buildSrc/Android.kt
+             APP_FOLDER: ./app/release/app.apk
+             CHANGELOG_FILE: ./CHANGELOG.md
+             RELEASE_TITLE: New Build
+             NAME_VARIABLE: app-release.apk
 
-      - uses: iota9star/sign-android-release@v1.0.5
-        name: Sign app APK
-          # ID used to access action output
-        id: sign_app
-        with:
-          releaseDirectory: app/build/outputs/apk/release
-          fileRex: .*apk
-          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
-          alias: ${{ secrets.ALIAS }}
-          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-          keyPassword: ${{ secrets.KEY_PASSWORD }}
-        env:
-          BUILD_TOOLS_VERSION: "30.0.2"
+
+
+#      - name: Build APK
+#        run: ./gradlew :app:assembleRelease -x test
+#        env:
+#          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+#          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+#          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+
+
+
+#      - uses: iota9star/sign-android-release@v1.0.5
+#        name: Sign app APK
+#          # ID used to access action output
+#        id: sign_app
+#        with:
+#          releaseDirectory: app/build/outputs/apk/release
+##          fileRex: .*apk
+#          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+#          alias: ${{ secrets.ALIAS }}
+#          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+#          keyPassword: ${{ secrets.KEY_PASSWORD }}
+#        env:
+#          BUILD_TOOLS_VERSION: "30.0.2"
+
 
 
 #      - uses: r0adkll/sign-android-release@v1
