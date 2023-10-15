@@ -1,26 +1,26 @@
 name: Android CI
 
 on:
-#  push:
-#    branches: [ "main" ]
+  push:
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-  workflow_dispatch:
-    inputs:
-      envarioment:
-        description: 'test puria'
-        required: true
-        default: 'production'
-        type: choice
-        options:
-          - production
-          - qa
-          - dev
-      versiontag:
-          description: 'test puria tag'
-          required: true
-          default: '23'
-          type: string
+#  workflow_dispatch:
+#    inputs:
+#      envarioment:
+#        description: 'test puria'
+#        required: true
+#        default: 'production'
+#        type: choice
+#        options:
+#          - production
+#          - qa
+#          - dev
+#      versiontag:
+#          description: 'test puria tag'
+#          required: true
+#          default: '23'
+#          type: string
 #    schedule:
 #     - cron: ' 0 1 * * * '
 
