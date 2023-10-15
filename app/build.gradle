@@ -16,6 +16,9 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
+        myDefaultSigningConfigs {
+            v1SigningEnabled true
+        }
         release {
             storeFile = file("keystore/android_keystore.jks")
             storePassword System.getenv("SIGNING_STORE_PASSWORD")
