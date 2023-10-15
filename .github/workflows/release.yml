@@ -1,4 +1,4 @@
-name: Android CI Release APK
+name: Android CI Rele
 
 on:
   workflow_dispatch:
