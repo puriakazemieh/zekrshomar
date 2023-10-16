@@ -13,45 +13,66 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
+      - uses: r0adkll/sign-android-release@v1
+        name: Sign app APK
+        # ID used to access action output
+        id: sign_app
         with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: gradle
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
-
-      - name: Build
-        run: ./gradlew build
-
-      - name: Assemble Release Bundle
-        run: |
-          ./gradlew bundleRelease
-      - name: Sign Release
-        uses: r0adkll/sign-android-release@v1
-        with:
-          releaseDirectory: app/build/outputs/bundle/release
+          releaseDirectory: app/build/outputs/apk/release
           signingKeyBase64: ${{ secrets.ANDROID_SIGNING_KEY }}
           alias: ${{ secrets.ANDROID_KEY_ALIAS }}
           keyStorePassword: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        env:
+          # override default build-tools version (29.0.3) -- optional
+          BUILD_TOOLS_VERSION: "30.0.2"
 
-
-      #rename apk to new Version
-#      - name: Change version
-#        run: ls -la app/build/outputs/bundle/release
-      - name: Change version
-        run:  mv app/build/outputs/bundle/release/app-release.aab  app/build/outputs/bundle/release/Zekrshomar_${{ github.event.inputs.version }}.aab
-
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v3.1.2
+      # Example use of `signedReleaseFile` output -- not needed
+      - uses: actions/upload-artifact@v2
         with:
-          name: Zekrshomar
-          path: app/build/outputs/bundle/release/Zekrshomar_${{ github.event.inputs.version }}.aab
+          name: Signed app bundle
+          path: ${{steps.sign_app.outputs.signedReleaseFile}}
+
+#    steps:
+#      - uses: actions/checkout@v3
+#      - name: Set up JDK 17
+#        uses: actions/setup-java@v3
+#        with:
+#          java-version: '17'
+#          distribution: 'temurin'
+#          cache: gradle
+#      - name: Grant execute permission for gradlew
+#        run: chmod +x gradlew
+#
+#
+#      - name: Build
+#        run: ./gradlew build
+#
+#      - name: Assemble Release Bundle
+#        run: |
+#          ./gradlew bundleRelease
+#      - name: Sign Release
+#        uses: r0adkll/sign-android-release@v1
+#        with:
+#          releaseDirectory: app/build/outputs/bundle/release
+#          signingKeyBase64: ${{ secrets.ANDROID_SIGNING_KEY }}
+#          alias: ${{ secrets.ANDROID_KEY_ALIAS }}
+#          keyStorePassword: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+#          keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
+#
+#
+#      #rename apk to new Version
+##      - name: Change version
+##        run: ls -la app/build/outputs/bundle/release
+#      - name: Change version
+#        run:  mv app/build/outputs/bundle/release/app-release.aab  app/build/outputs/bundle/release/Zekrshomar_${{ github.event.inputs.version }}.aab
+#
+#
+#      - name: Upload APK
+#        uses: actions/upload-artifact@v3.1.2
+#        with:
+#          name: Zekrshomar
+#          path: app/build/outputs/bundle/release/Zekrshomar_${{ github.event.inputs.version }}.aab
 
 #      - name: Tag Release
 #        run: |
