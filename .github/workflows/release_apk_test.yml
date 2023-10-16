@@ -1,12 +1,10 @@
 name: Apk test
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Application version'
-        required: true
-        default: '1.0'
+  push:
+    branches: main
+    tags:
+      - v*
 jobs:
   release_build:
      runs-on: ubuntu-latest
