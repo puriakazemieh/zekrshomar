@@ -23,13 +23,39 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build Release APK
-        run: ./gradlew assembleRelease
-      - name: Releasing using Hub
-        uses: kyze8439690/action-release-releaseapk@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-          APP_FOLDER: app
+
+      - name: Build
+        run: ./gradlew build
+
+      - name: Assemble Release Bundle
+        run: |
+          ./gradlew bundleRelease
+      - name: Sign Release
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: app/build/outputs/bundle/release
+          signingKeyBase64: ${{ secrets.ANDROID_SIGNING_KEY }}
+          alias: ${{ secrets.ANDROID_KEY_ALIAS }}
+          keyStorePassword: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
+
+      - name: Tag Release
+        run: |
+          version_name=${GITHUB_REF##*/}
+          echo "Tagging release with tag $version_name"
+          git tag $version_name release/$version_name
+          git push origin --tags
+      - name: Create service_account.json
+        run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
+
+      - name: Deploy to Alpha
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJson: service_account.json
+          packageName: com.jshvarts.flows
+          releaseFile: app/build/outputs/bundle/release/app-release.aab
+          track: alpha
+          whatsNewDirectory: distribution/
 
 
 #    steps:
@@ -54,6 +80,13 @@ jobs:
 #          path: ${{steps.sign_app.outputs.signedReleaseFile}}
 
 
+#      - name: Build Release APK
+#        run: ./gradlew assembleRelease
+#      - name: Releasing using Hub
+#        uses: kyze8439690/action-release-releaseapk@master
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+#          APP_FOLDER: app
 
 #      - uses: ilharp/sign-android-release@v1.0.4 # Or use @nightly
 #        name: Sign app APK
