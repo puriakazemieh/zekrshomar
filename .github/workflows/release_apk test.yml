@@ -41,8 +41,11 @@ jobs:
 
 
       #rename apk to new Version
+#      - name: Change version
+#        run: ls -la app/build/outputs/bundle/release
       - name: Change version
-        run: ls -la app/build/outputs/bundle/release
+        run:  mv app/build/outputs/bundle/release/app-release.aab  app/build/outputs/bundle/release/Zekrshomar_$_${{ github.event.inputs.version }}.aab
+
 
       - name: Upload APK
         uses: actions/upload-artifact@v3.1.2
