@@ -29,10 +29,18 @@ jobs:
              ~/.gradle/wrapper
            key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
 
+
+#       - name: Decode Keystore
+#         id: decode_keystore
+#         uses: timheuer/base64-to-file@v1.2
+#         with:
+#           fileName: 'android_keystore.jks'
+#           fileDir: '/home/runner/work/<<project name>>/<<project name>>/app/keystore/'
+#           encodedString: ${{ secrets.KEYSTORE }}
        #1
        - name: Decode Keystore
          env:
-           ENCODED_STRING: ${{ secrets.SIGNING_KEY_STORE_BASE64 }}
+           ENCODED_STRING: ${{ secrets.KEYSTORE }}
            SIGNING_KEY_STORE_PATH: ${{ secrets.SIGNING_KEY_STORE_PATH }}
 
          run: |
