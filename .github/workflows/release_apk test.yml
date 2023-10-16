@@ -39,11 +39,15 @@ jobs:
           keyStorePassword: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
 
-      - name: Upload APK
+
+      #rename apk to new Version
+      - name: Change version
+        run: ls -la app/build/outputs/bundle/release
+
         uses: actions/upload-artifact@v3.1.2
         with:
           name: Zekrshomar
-          path: app/release/Zekrshomar_${{ github.event.inputs.version }}.aab
+          path:  app/build/outputs/bundle/release/Zekrshomar_${{ github.event.inputs.version }}.aab
 
 #      - name: Tag Release
 #        run: |
