@@ -189,7 +189,7 @@ jobs:
       - name: Download APK from build
         uses: actions/download-artifact@v1
         with:
-          name: <<application name>>
+          name: Zekrshomar
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v1
@@ -200,4 +200,4 @@ jobs:
           name: Release v${{ github.event.inputs.version }}
           draft: false
           prerelease: false
-          files: <<application name>>/<<application name>>_${{ github.event.inputs.version }}.apk
+          files: Zekrshomar/Zekrshomar_${{ github.event.inputs.version }}.aab
