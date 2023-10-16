@@ -1,4 +1,4 @@
-name: Android CI Rele
+name: Apk test
 
 on:
   workflow_dispatch:
@@ -11,6 +11,25 @@ jobs:
   build:
     name: Build Signed APK
     runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build Release APK
+        run: ./gradlew assembleRelease
+      - name: Releasing using Hub
+        uses: kyze8439690/action-release-releaseapk@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          APP_FOLDER: app
 
 
 #    steps:
@@ -33,27 +52,6 @@ jobs:
 #        with:
 #          name: Signed app bundle
 #          path: ${{steps.sign_app.outputs.signedReleaseFile}}
-
-
-
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: gradle
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
-      - name: Build Release APK
-        run: ./gradlew assembleRelease
-      - name: Releasing using Hub
-        uses: kyze8439690/action-release-releaseapk@master
-        env:
-             GITHUB_TOKEN: ${{ secrets.TOKEN }}
-             APP_FOLDER: app
 
 
 

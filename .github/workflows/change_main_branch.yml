@@ -1,4 +1,4 @@
-name: Android CI
+name: Change Branch main -> LocalTest AndroidTest AssembleDebug Notification
 
 on:
   push:

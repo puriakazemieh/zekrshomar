@@ -1,4 +1,4 @@
-name: Android CI Release
+name: Release Apk
 
 on:
   workflow_dispatch:
@@ -22,8 +22,6 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      # Here we need to decode keystore.jks from base64 string and place it
-      # in the folder specified in the release signing configuration
       - name: Decode Keystore
         id: decode_keystore
         uses: timheuer/base64-to-file@v1.2
@@ -40,11 +38,7 @@ jobs:
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
 
-      # Show information about the APK's signing certificates
-#      - name: Verify Signature
-#        run: $ANDROID_SDK_ROOT/build-tools/33.0.0/apksigner verify --print-certs -verbose  app/build/outputs/apk/release/Zekrshomar_${{ github.event.inputs.version }}.apk
-
-
+      #rename apk to new Version
       - name: Change version
         run:  mv app/build/outputs/apk/release/Zekrshomar_1.0.apk  app/build/outputs/apk/release/Zekrshomar_${{ github.event.inputs.version }}.apk
 
@@ -54,6 +48,7 @@ jobs:
         with:
           name: Zekrshomar
           path: app/build/outputs/apk/release/Zekrshomar_${{ github.event.inputs.version }}.apk
+
   release:
     name: Release APK
     needs: build
