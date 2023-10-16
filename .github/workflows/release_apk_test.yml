@@ -65,11 +65,18 @@ jobs:
            SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
          run: ./gradlew bundleRelease
        #3
+       - name: ls file apk
+         run: ls -la app/build/outputs/apk/release
+       - name: ls file bundle
+         run: ls -la app/build/outputs/bundle/release
+
        - name: Upload Release Build to Artifacts
          uses: actions/upload-artifact@v3
          with:
            name: release-artifacts
-           paths: app/build/outputs/apk/release/ && app/build/outputs/bundle/release/
+           paths: | 
+            app/build/outputs/apk/release/ 
+            app/build/outputs/bundle/release/
        #4
        - name: Create Github Release
          uses: softprops/action-gh-release@v1
