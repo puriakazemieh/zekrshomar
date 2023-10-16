@@ -40,7 +40,7 @@ jobs:
 
       #rename apk to new Version
       - name: Change version APK
-        run: INP_VER=${{ github.event.inputs.version }};[[ $INP_VER != "1.0" ]] && mv app/build/outputs/apk/release/Zekrshomar_1.0.apk  app/build/outputs/apk/release/Zekrshomar_${{ github.event.inputs.version }}.apk
+        run: if [  "${{ github.event.inputs.version }}" != "1.0" ]; then mv app/build/outputs/apk/release/Zekrshomar_1.0.apk  app/build/outputs/apk/release/Zekrshomar_${{ github.event.inputs.version }}.apk fi
 
       # Save the APK after the Build job is complete to publish it as a Github release in the next job
       - name: Upload APK
