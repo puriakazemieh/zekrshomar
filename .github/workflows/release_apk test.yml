@@ -39,6 +39,12 @@ jobs:
           keyStorePassword: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
 
+      - name: Upload APK
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: Zekrshomar
+          path: app/build/outputs/bundle/release/Zekrshomar_${{ github.event.inputs.version }}.apk
+
 #      - name: Tag Release
 #        run: |
 #          version_name=${GITHUB_REF##*/}
@@ -56,7 +62,6 @@ jobs:
 #          releaseFile: app/build/outputs/bundle/release/app-release.aab
 #          track: alpha
 #          whatsNewDirectory: distribution/
-
 
 #    steps:
 #      - uses: r0adkll/sign-android-release@v1
@@ -78,7 +83,6 @@ jobs:
 #        with:
 #          name: Signed app bundle
 #          path: ${{steps.sign_app.outputs.signedReleaseFile}}
-
 
 #      - name: Build Release APK
 #        run: ./gradlew assembleRelease
@@ -103,8 +107,6 @@ jobs:
 #        with:
 #          name: Signed app bundle
 #          path: ${{steps.sign_app.outputs.signedFile}}
-
-
 
 #    steps:
 #      - uses: actions/checkout@v3
