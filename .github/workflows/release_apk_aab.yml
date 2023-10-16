@@ -40,7 +40,7 @@ jobs:
 
       #rename apk to new Version
       - name: Change version APK
-        run: if [  "${{ github.event.inputs.version }}" != "1.0" ]; then 
+        run: if [  "${{ github.event.inputs.version }}" -eq "1.0" ]; then 
              mv app/build/outputs/apk/release/Zekrshomar_1.0.apk  app/build/outputs/apk/release/Zekrshomar_${{ github.event.inputs.version }}.apk 
              fi
 
