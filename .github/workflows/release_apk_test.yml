@@ -13,13 +13,13 @@ jobs:
 #     if: startsWith(github.ref, 'refs/tags/')
 
      steps:
-       - uses: actions/checkout@v2.6.0
-
-       - name: Setup JAVA 17
+       - uses: actions/checkout@v3
+       - name: Set up JDK 17
          uses: actions/setup-java@v3
          with:
-           distribution: 'tearing'
-           java-version: 17
+           java-version: '17'
+           distribution: 'temurin'
+           cache: gradle
 
        - name: Cache Gradle and wrapper
          uses: actions/cache@v2
