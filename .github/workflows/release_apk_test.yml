@@ -91,7 +91,7 @@ jobs:
            generate_release_notes: true
            prerelease: true
            files: |
-             app/build/outputs/apk/release/app-release.apk
+             app/build/outputs/apk/release/Zekrshomar_1.0.apk
              app/build/outputs/bundle/release/app-release.aab
 #jobs:
 #  build:
