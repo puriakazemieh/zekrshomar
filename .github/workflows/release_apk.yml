@@ -1,4 +1,4 @@
-name: Release Apk
+name: Release Apk Bundle
 
 on:
   workflow_dispatch:
