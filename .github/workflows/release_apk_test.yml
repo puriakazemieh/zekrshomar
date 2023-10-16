@@ -74,10 +74,10 @@ jobs:
          uses: actions/upload-artifact@v3
          with:
            name: release-artifacts
-           path: app/build/outputs/bundle/release/Zekrshomar_1.0.aab
-#           paths: |
-#            app/build/outputs/apk/release/
-#            app/build/outputs/bundle/release/
+           paths: |
+            app/build/outputs/apk/release/Zekrshomar_1.0.apk
+            app/build/outputs/bundle/release/app-release.aab
+#           path: app/build/outputs/bundle/release/Zekrshomar_1.0.aab
        #4
        - name: Create Github Release
          uses: softprops/action-gh-release@v1
