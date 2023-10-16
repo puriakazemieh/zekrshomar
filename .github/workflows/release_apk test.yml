@@ -44,7 +44,7 @@ jobs:
 #      - name: Change version
 #        run: ls -la app/build/outputs/bundle/release
       - name: Change version
-        run:  mv app/build/outputs/bundle/release/app-release.aab  app/build/outputs/bundle/release/Zekrshomar_$_${{ github.event.inputs.version }}.aab
+        run:  mv app/build/outputs/bundle/release/app-release.aab  app/build/outputs/bundle/release/Zekrshomar_${{ github.event.inputs.version }}.aab
 
 
       - name: Upload APK
